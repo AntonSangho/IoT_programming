@@ -91,3 +91,4 @@ def timeline(user_id):
         'user_id' : user_id,
         'timeline' : timeline
     })
+
