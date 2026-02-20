@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh issue view:*)",
+      "Bash(git -C C:/Users/reliq/projects/IoT_programming log --oneline --all)",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}
