@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 from flask import Flask, render_template
+import http.client
 import urllib.request
 from urllib.error import HTTPError, URLError
 
@@ -12,13 +13,22 @@ events_url = base_url + "/events"
 # wlan0 IP를 source로 지정하여 ESP8266과 무선으로 통신
 source_ip = "192.168.0.81"
 
+class BoundHTTPConnection(http.client.HTTPConnection):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, source_address=(source_ip, 0), **kwargs)
+
+class BoundHTTPHandler(urllib.request.HTTPHandler):
+    def http_open(self, req):
+        return self.do_open(BoundHTTPConnection, req)
+
+opener = urllib.request.build_opener(BoundHTTPHandler)
+
 app = Flask(__name__, template_folder=".")
 
 @app.route('/events')
 def getevents():
     try:
-        req = urllib.request.Request(events_url)
-        u = urllib.request.urlopen(req, timeout=5, source_address=(source_ip, 0))
+        u = opener.open(events_url, timeout=5)
         data = u.read()
     except HTTPError as e:
         print("HTTP error: %d" % e.code)
