@@ -2,7 +2,7 @@
 #include <ESP8266WebServer.h>
 #include <DHT.h>
 
-#define DHTTYPE DHT22
+#define DHTTYPE DHT11
 #define DHTPIN 2
 
 const char* ssid = "<SSID>";

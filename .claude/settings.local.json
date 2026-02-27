@@ -7,7 +7,11 @@
       "Bash(cat:*)",
       "WebFetch(domain:docs.espressif.com)",
       "Bash(gh issue:*)",
-      "WebFetch(domain:esp32io.com)"
+      "WebFetch(domain:esp32io.com)",
+      "Bash(git -C /c/Users/reliq/projects/IoT_programming push origin main)",
+      "WebSearch",
+      "WebFetch(domain:www.hivemq.com)",
+      "Bash(git fetch:*)"
     ]
   }
 }
